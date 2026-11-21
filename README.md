@@ -70,6 +70,31 @@ last.fm dataset](https://github.com/benfred/implicit/blob/master/examples/lastfm
 
 For more information see the [documentation](https://benfred.github.io/implicit/).
 
+#### Reproducible evaluation
+
+If evaluation numbers drift by fractions of a point between runs, the split shuffle and
+the negative sample were not pinned down. `implicit.reproducible_evaluation` makes both
+part of a saved, seed-controlled plan, so the same model and plan always reproduce the
+same metrics:
+
+```python
+from implicit.reproducible_evaluation import (
+    build_evaluation_plan, compare_results, evaluate,
+)
+
+plan = build_evaluation_plan(user_items, split="leave_k_out", K=1,
+                             num_negatives=100, seed=20240101)
+result = evaluate(model, plan, K=10)
+print(result.summary())          # metrics + split/seed/negatives + plan fingerprint
+print(compare_results(result_a, result_b, metric="recall").summary())
+
+plan.save("eval_plan.npz")
+```
+
+It is opt-in: existing evaluation functions and model training are unchanged. Split and
+sampling rules, metric definitions, skipped-user counts and support for batched/sharded
+runs are described in [the docs](https://benfred.github.io/implicit/api/reproducible_evaluation.html).
+
 #### Articles about Implicit
 
 These blog posts describe the algorithms that power this library:

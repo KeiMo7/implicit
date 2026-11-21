@@ -1,3 +1,17 @@
+## Unreleased
+
+### New Features
+
+* Add `implicit.reproducible_evaluation`: an opt-in evaluation pipeline that freezes
+  the split and per-user negative samples into a saved plan, records the split policy,
+  metric definitions and dataset statistics with every result, skips and counts
+  unusable users, and compares two models on the same plan with a paired bootstrap.
+  Enables sharded evaluation via `users=` + `merge_results`. Existing evaluation and
+  training code are unchanged.
+* `leave_k_out_split` gained an optional `shuffle_random_state` argument. When set, the
+  choice of which interaction is held out is reproducible from that seed; the default
+  `None` keeps the previous global-numpy-random behaviour.
+
 ## v0.5.0
 
 ### Breaking API Changes

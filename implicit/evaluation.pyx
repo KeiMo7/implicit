@@ -74,7 +74,7 @@ cdef _choose(rng, int n, float frac):
     return arr
 
 
-cdef _take_tails(arr, int n, return_complement=False, shuffled=False):
+cdef _take_tails(arr, int n, return_complement=False, shuffled=False, rng=None):
     """
     Given an array of (optionally shuffled) integers in the range 0->n, take the indices
     of the last 'n' occurrences of each integer (tail) -- subject to shuffling.
@@ -108,6 +108,11 @@ cdef _take_tails(arr, int n, return_complement=False, shuffled=False):
     shuffled: bool
         Optionally indicate whether you wish the dataset to be shuffled. This will act
         to randomise the 'tails' selected.
+    rng: numpy.random.Generator, optional
+        Only used when ``shuffled`` is True. When given, the shuffle draws from this
+        generator instead of the global numpy random state. When None (the default),
+        the historical global-state behaviour is kept, so existing callers and their
+        results are unchanged.
 
     Returns
     -------
@@ -125,7 +130,11 @@ cdef _take_tails(arr, int n, return_complement=False, shuffled=False):
     ranges = np.linspace(start, end, num=n + 1, dtype=int)[1:]
 
     if shuffled:
-        shuffled_idx = (sorted_arr + np.random.random(arr.shape)).argsort()
+        if rng is None:
+            random_values = np.random.random(arr.shape)
+        else:
+            random_values = rng.random(arr.shape)
+        shuffled_idx = (sorted_arr + random_values).argsort()
         tails = shuffled_idx[np.ravel(ranges, order="f")]
     else:
         tails = np.ravel(ranges, order="f")
@@ -139,7 +148,8 @@ cdef _take_tails(arr, int n, return_complement=False, shuffled=False):
 
 
 cpdef leave_k_out_split(
-    ratings, int K=1, float train_only_size=0.0, random_state=None
+    ratings, int K=1, float train_only_size=0.0, random_state=None,
+    shuffle_random_state=None
 ):
     """Implements the 'leave-k-out' split protocol for a ratings matrix. Default
     parameters will produce a 'leave-one-out' split.
@@ -161,6 +171,13 @@ cpdef leave_k_out_split(
     random_state : int, None or RandomState
         The existing RandomState. If None, or an int, will be used
         to seed a new numpy RandomState.
+    shuffle_random_state : int, None or numpy.random.Generator
+        Seed or generator controlling *which* interaction is held out per user.
+        If None (default) the shuffle uses the global numpy random state, which is
+        the historical behaviour and is not reproducible from ``random_state`` alone.
+        Set this to make the split reproducible: the same value produces the same
+        held-out interactions. This only affects the leave-k-out split; it does not
+        change model training.
 
     Returns
     -------
@@ -176,6 +193,9 @@ cpdef leave_k_out_split(
 
     ratings = ratings.tocoo()  # this will sort row/cols unless ratings is COO.
     random_state = check_random_state(random_state)
+    shuffle_rng = None
+    if shuffle_random_state is not None:
+        shuffle_rng = np.random.default_rng(shuffle_random_state)
 
     users = ratings.row
     items = ratings.col
@@ -204,7 +224,7 @@ cpdef leave_k_out_split(
     candidate_data = data[full_candidate_mask]
 
     test_idx, train_idx = _take_tails(
-        candidate_users, K, shuffled=True, return_complement=True
+        candidate_users, K, shuffled=True, return_complement=True, rng=shuffle_rng
     )
 
     # get all remaining remaining candidate user-item pairs, and prepare to append to
