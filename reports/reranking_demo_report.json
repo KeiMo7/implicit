@@ -1,0 +1,263 @@
+{
+  "userid": 7,
+  "ids": [
+    301,
+    101,
+    201,
+    302,
+    102,
+    202,
+    401,
+    501,
+    502,
+    402
+  ],
+  "scores": [
+    8.5,
+    9.800000190734863,
+    8.800000190734863,
+    8.399999618530273,
+    9.699999809265137,
+    8.699999809265137,
+    8.199999809265137,
+    7.900000095367432,
+    7.800000190734863,
+    8.100000381469727
+  ],
+  "positions": [
+    {
+      "position": 0,
+      "item_id": 301,
+      "original_rank": 13,
+      "final_rank": 0,
+      "rules": [
+        "campaign-pin",
+        "user7-series-cap",
+        "user7-shop-cap"
+      ],
+      "reasons": [
+        "pinned position",
+        "backfilled from recall-ranked-beyond-N"
+      ],
+      "pinned": true,
+      "backfilled": true,
+      "backfill_source": "recall-ranked-beyond-N"
+    },
+    {
+      "position": 1,
+      "item_id": 101,
+      "original_rank": 0,
+      "final_rank": 1,
+      "rules": [
+        "user7-series-cap",
+        "user7-shop-cap"
+      ],
+      "reasons": [],
+      "pinned": false,
+      "backfilled": false,
+      "backfill_source": null
+    },
+    {
+      "position": 2,
+      "item_id": 201,
+      "original_rank": 10,
+      "final_rank": 2,
+      "rules": [
+        "user7-series-cap",
+        "user7-shop-cap"
+      ],
+      "reasons": [
+        "backfilled from recall-ranked-beyond-N"
+      ],
+      "pinned": false,
+      "backfilled": true,
+      "backfill_source": "recall-ranked-beyond-N"
+    },
+    {
+      "position": 3,
+      "item_id": 302,
+      "original_rank": 14,
+      "final_rank": 3,
+      "rules": [
+        "user7-series-cap",
+        "user7-shop-cap"
+      ],
+      "reasons": [
+        "backfilled from recall-ranked-beyond-N"
+      ],
+      "pinned": false,
+      "backfilled": true,
+      "backfill_source": "recall-ranked-beyond-N"
+    },
+    {
+      "position": 4,
+      "item_id": 102,
+      "original_rank": 1,
+      "final_rank": 4,
+      "rules": [
+        "user7-series-cap",
+        "user7-shop-cap"
+      ],
+      "reasons": [],
+      "pinned": false,
+      "backfilled": false,
+      "backfill_source": null
+    },
+    {
+      "position": 5,
+      "item_id": 202,
+      "original_rank": 11,
+      "final_rank": 5,
+      "rules": [
+        "user7-series-cap",
+        "user7-shop-cap"
+      ],
+      "reasons": [
+        "backfilled from recall-ranked-beyond-N"
+      ],
+      "pinned": false,
+      "backfilled": true,
+      "backfill_source": "recall-ranked-beyond-N"
+    },
+    {
+      "position": 6,
+      "item_id": 401,
+      "original_rank": 16,
+      "final_rank": 6,
+      "rules": [
+        "user7-series-cap",
+        "user7-shop-cap"
+      ],
+      "reasons": [
+        "backfilled from recall-ranked-beyond-N"
+      ],
+      "pinned": false,
+      "backfilled": true,
+      "backfill_source": "recall-ranked-beyond-N"
+    },
+    {
+      "position": 7,
+      "item_id": 501,
+      "original_rank": 18,
+      "final_rank": 7,
+      "rules": [
+        "user7-series-cap",
+        "user7-shop-cap"
+      ],
+      "reasons": [
+        "backfilled from recall-ranked-beyond-N"
+      ],
+      "pinned": false,
+      "backfilled": true,
+      "backfill_source": "recall-ranked-beyond-N"
+    },
+    {
+      "position": 8,
+      "item_id": 502,
+      "original_rank": 19,
+      "final_rank": 8,
+      "rules": [
+        "user7-series-cap",
+        "user7-shop-cap"
+      ],
+      "reasons": [
+        "backfilled from recall-ranked-beyond-N",
+        "spacing relaxed to fill slot"
+      ],
+      "pinned": false,
+      "backfilled": true,
+      "backfill_source": "recall-ranked-beyond-N"
+    },
+    {
+      "position": 9,
+      "item_id": 402,
+      "original_rank": 17,
+      "final_rank": 9,
+      "rules": [
+        "user7-series-cap",
+        "user7-shop-cap"
+      ],
+      "reasons": [
+        "backfilled from recall-ranked-beyond-N"
+      ],
+      "pinned": false,
+      "backfilled": true,
+      "backfill_source": "recall-ranked-beyond-N"
+    }
+  ],
+  "removed": [
+    {
+      "item_id": 109,
+      "original_rank": 8,
+      "reason": "blacklist",
+      "rule_id": "ops-blacklist",
+      "source": "ops-ticket-2026-11"
+    },
+    {
+      "item_id": 103,
+      "original_rank": 2,
+      "reason": "group_cap_exhausted",
+      "rule_id": "user7-series-cap",
+      "source": "config"
+    },
+    {
+      "item_id": 104,
+      "original_rank": 3,
+      "reason": "group_cap_exhausted",
+      "rule_id": "user7-series-cap",
+      "source": "config"
+    },
+    {
+      "item_id": 105,
+      "original_rank": 4,
+      "reason": "group_cap_exhausted",
+      "rule_id": "user7-series-cap",
+      "source": "config"
+    },
+    {
+      "item_id": 106,
+      "original_rank": 5,
+      "reason": "group_cap_exhausted",
+      "rule_id": "user7-series-cap",
+      "source": "config"
+    },
+    {
+      "item_id": 107,
+      "original_rank": 6,
+      "reason": "group_cap_exhausted",
+      "rule_id": "user7-series-cap",
+      "source": "config"
+    },
+    {
+      "item_id": 108,
+      "original_rank": 7,
+      "reason": "group_cap_exhausted",
+      "rule_id": "user7-series-cap",
+      "source": "config"
+    },
+    {
+      "item_id": 110,
+      "original_rank": 9,
+      "reason": "group_cap_exhausted",
+      "rule_id": "user7-series-cap",
+      "source": "config"
+    },
+    {
+      "item_id": 203,
+      "original_rank": 12,
+      "reason": "backfill_not_placed",
+      "rule_id": "user7-series-cap",
+      "source": "recall-ranked-beyond-N"
+    },
+    {
+      "item_id": 303,
+      "original_rank": 15,
+      "reason": "backfill_not_placed",
+      "rule_id": "user7-series-cap",
+      "source": "recall-ranked-beyond-N"
+    }
+  ],
+  "conflicts": [],
+  "unfulfilled": [],
+  "fallback": null
+}

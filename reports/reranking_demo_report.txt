@@ -1,0 +1,55 @@
+展示重排验收报告（用户 7，专属规则：同系列上限 2）
+==============================================================================
+
+【重排前】召回顺序（前 10 位，series-A 扎堆）：
+  名次  0  item=101  series=A   shop=shop-1   score=9.80
+  名次  1  item=102  series=A   shop=shop-1   score=9.70
+  名次  2  item=103  series=A   shop=shop-2   score=9.60
+  名次  3  item=104  series=A   shop=shop-2   score=9.50
+  名次  4  item=105  series=A   shop=shop-3   score=9.40
+  名次  5  item=106  series=A   shop=shop-3   score=9.30
+  名次  6  item=107  series=A   shop=shop-1   score=9.20
+  名次  7  item=108  series=A   shop=shop-1   score=9.10
+  名次  8  item=109  series=A   shop=shop-4   score=9.00
+  名次  9  item=110  series=A   shop=shop-4   score=8.90
+
+【重排后】最终展示位：
+  位置  0  item=301  series=C   shop=shop-7   原名次=13 规则=campaign-pin,user7-series-cap,user7-shop-cap [PIN/BACKFILL]
+  位置  1  item=101  series=A   shop=shop-1   原名次= 0 规则=user7-series-cap,user7-shop-cap 
+  位置  2  item=201  series=B   shop=shop-5   原名次=10 规则=user7-series-cap,user7-shop-cap [BACKFILL]
+  位置  3  item=302  series=C   shop=shop-7   原名次=14 规则=user7-series-cap,user7-shop-cap [BACKFILL]
+  位置  4  item=102  series=A   shop=shop-1   原名次= 1 规则=user7-series-cap,user7-shop-cap 
+  位置  5  item=202  series=B   shop=shop-5   原名次=11 规则=user7-series-cap,user7-shop-cap [BACKFILL]
+  位置  6  item=401  series=D   shop=shop-9   原名次=16 规则=user7-series-cap,user7-shop-cap [BACKFILL]
+  位置  7  item=501  series=E   shop=shop-10  原名次=18 规则=user7-series-cap,user7-shop-cap [BACKFILL]
+  位置  8  item=502  series=E   shop=shop-10  原名次=19 规则=user7-series-cap,user7-shop-cap [BACKFILL]
+  位置  9  item=402  series=D   shop=shop-9   原名次=17 规则=user7-series-cap,user7-shop-cap [BACKFILL]
+
+【剔除明细】
+  item=109 原名次=8 原因=blacklist 规则=ops-blacklist 来源=ops-ticket-2026-11
+  item=103 原名次=2 原因=group_cap_exhausted 规则=user7-series-cap 来源=config
+  item=104 原名次=3 原因=group_cap_exhausted 规则=user7-series-cap 来源=config
+  item=105 原名次=4 原因=group_cap_exhausted 规则=user7-series-cap 来源=config
+  item=106 原名次=5 原因=group_cap_exhausted 规则=user7-series-cap 来源=config
+  item=107 原名次=6 原因=group_cap_exhausted 规则=user7-series-cap 来源=config
+  item=108 原名次=7 原因=group_cap_exhausted 规则=user7-series-cap 来源=config
+  item=110 原名次=9 原因=group_cap_exhausted 规则=user7-series-cap 来源=config
+  item=203 原名次=12 原因=backfill_not_placed 规则=user7-series-cap 来源=recall-ranked-beyond-N
+  item=303 原名次=15 原因=backfill_not_placed 规则=user7-series-cap 来源=recall-ranked-beyond-N
+
+【规则冲突裁决】
+  本场景无冲突（黑名单/pin 未命中同一物品）
+
+【未竟诉求】
+  无
+
+【规则集回落】
+  命中用户 7 专属规则，无回落
+
+【约束自检】
+  各系列占位数: {'C': 2, 'A': 2, 'B': 2, 'D': 2, 'E': 2}（用户 7 上限=2）
+  各店铺占位数: {'shop-7': 2, 'shop-1': 2, 'shop-5': 2, 'shop-9': 2, 'shop-10': 2}（上限=2）
+  限流硬上限全部满足: True
+  打散: 1 个位置因候选不足放宽间距并已留痕 -> [502]
+  黑名单物品 109 已剔除: True
+  pin 物品 301 位于首位: True
